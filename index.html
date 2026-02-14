@@ -95,7 +95,7 @@ const response = document.getElementById("response");
 const card = document.querySelector(".card");
 const music = document.getElementById("music");
 
-// Set initial position of NO button next to YES
+// Set initial NO button position
 function setInitialPosition() {
   const yesRect = yesBtn.getBoundingClientRect();
   const cardRect = card.getBoundingClientRect();
@@ -116,10 +116,10 @@ noBtn.addEventListener("mouseover", () => {
   noBtn.style.top = randomY + "px";
 });
 
-// YES button shows message + GIF + plays music + hides NO button
+// YES button click: show GIF, play music, hide NO button
 yesBtn.addEventListener("click", () => {
   music.play(); // start music
-  noBtn.style.display = "none"; // hide NO button
+  noBtn.style.visibility = 'hidden'; // reliably hide NO button
 
   response.innerHTML = `
     <h2 style="color:#ff4d88;">YAYYYY 💖</h2>
