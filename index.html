@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Will You Be My Valentine?</title>
+<title>Will You Be My Valentine? 💖</title>
 
 <style>
   body {
@@ -24,6 +24,7 @@
     text-align: center;
     width: 400px;
     position: relative;
+    display: none; /* hidden initially */
   }
 
   h1 {
@@ -66,13 +67,37 @@
     margin-top: 20px;
     border-radius: 12px;
   }
+
+  /* Open Me button overlay */
+  #openBtn {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #ff4d88;
+    color: white;
+    font-size: 2rem;
+    padding: 20px 40px;
+    border-radius: 15px;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    transition: 0.2s ease;
+    z-index: 1000;
+  }
+
+  #openBtn:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+  }
 </style>
 </head>
 
 <body>
 
-<div class="card">
-  <h1>Natasha, will you be my Valentine? 🎉</h1>
+<!-- Open Me button -->
+<div id="openBtn">Open Me</div>
+
+<div class="card" id="valentineCard">
+  <h1>Natasha, will you be my Valentine? 💖</h1>
 
   <div class="buttons">
     <button id="yesBtn">Yes 😊</button>
@@ -97,15 +122,17 @@
   const noBtn = document.getElementById("noBtn");
   const yesBtn = document.getElementById("yesBtn");
   const response = document.getElementById("response");
-  const card = document.querySelector(".card");
+  const card = document.getElementById("valentineCard");
   const bgMusic = document.getElementById("bgMusic");
   const yesMusic = document.getElementById("yesMusic");
+  const openBtn = document.getElementById("openBtn");
 
-  // Attempt to autoplay background music on page load
-  window.addEventListener("load", () => {
-    bgMusic.play().catch(() => {
-      console.log("Autoplay blocked, waiting for first user interaction");
-    });
+  // Start button click
+  openBtn.addEventListener("click", () => {
+    bgMusic.play().catch(() => {}); // play background music
+    card.style.display = "block";    // show Valentine card
+    openBtn.style.display = "none";  // hide Open Me button
+    setInitialPosition();             // position NO button
   });
 
   // Set initial NO button position relative to YES button
@@ -115,7 +142,6 @@
     noBtn.style.left = (yesRect.right - cardRect.left + 20) + "px";
     noBtn.style.top = (yesRect.top - cardRect.top) + "px";
   }
-  setInitialPosition();
 
   // Move NO button randomly within card boundaries
   function moveNoButton() {
