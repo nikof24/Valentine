@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Natasha will you be my Valentine?</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 150px;
+      background-color: #fff0f5;
+    }
+    h1 {
+      font-size: 2.5rem;
+      color: #d6336c;
+    }
+    .buttons {
+      margin-top: 20px;
+    }
+    button {
+      font-size: 1.2rem;
+      padding: 10px 20px;
+      margin: 0 10px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      background-color: #ff6b81;
+      color: white;
+    }
+    button:hover {
+      background-color: #ff4d6d;
+    }
+    #yayText {
+      margin-top: 30px;
+      font-size: 1.5rem;
+      color: #20c997;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Natasha will you be my Valentine?</h1>
+
+  <div class="buttons">
+    <button id="yesBtn">Yes</button>
+    <button id="noBtn">No</button>
+  </div>
+
+  <p id="shyText">“No” seems a bit shy</p>
+
+  <p id="yayText">🎉 YAY! 🎉</p>
+
+  <script>
+    document.getElementById("yesBtn").addEventListener("click", function() {
+      document.getElementById("yayText").style.display = "block";
+    });
+    document.getElementById("noBtn").addEventListener("click", function() {
+      document.getElementById("shyText").textContent = "Aww, that’s okay too!";
+    });
+  </script>
+
+</body>
+</html>
