@@ -164,9 +164,9 @@
 
   // YES button click
   yesBtn.addEventListener("click", () => {
-    bgMusic.pause();  // Stop background music
-    yesMusic.play();  // Play YES music
-    noBtn.style.visibility = "hidden"; // Hide NO button
+    bgMusic.pause();              // Stop background music
+    yesMusic.play();              // Play YES music
+    noBtn.style.display = "none"; // NO button disappears immediately
 
     response.innerHTML = `
       <h2 style="color:#ff4d88;">YAYYYY 🎉</h2>
