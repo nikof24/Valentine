@@ -16,15 +16,14 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Riquadro bianco */
 .card {
   background: white;
   padding: 50px;
   border-radius: 20px;
   box-shadow: 0 15px 40px rgba(0,0,0,0.1);
   text-align: center;
-  position: relative;
   width: 400px;
+  position: relative;
 }
 
 h1 {
@@ -35,7 +34,6 @@ h1 {
 .buttons {
   display: flex;
   justify-content: center;
-  gap: 40px;
   margin-bottom: 30px;
 }
 
@@ -85,7 +83,7 @@ button:hover {
   <div id="response"></div>
 </div>
 
-<!-- Musica -->
+<!-- Music -->
 <audio id="music" loop>
   <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
 </audio>
@@ -97,7 +95,7 @@ const response = document.getElementById("response");
 const card = document.querySelector(".card");
 const music = document.getElementById("music");
 
-/* Posizione iniziale del NO */
+// Set initial position of NO button next to YES
 function setInitialPosition() {
   const yesRect = yesBtn.getBoundingClientRect();
   const cardRect = card.getBoundingClientRect();
@@ -106,7 +104,7 @@ function setInitialPosition() {
 }
 setInitialPosition();
 
-/* NO scappa */
+// NO button runs away inside the card
 noBtn.addEventListener("mouseover", () => {
   const maxX = card.clientWidth - noBtn.offsetWidth;
   const maxY = card.clientHeight - noBtn.offsetHeight;
@@ -118,14 +116,15 @@ noBtn.addEventListener("mouseover", () => {
   noBtn.style.top = randomY + "px";
 });
 
-/* YES */
+// YES button shows message + GIF + plays music + hides NO button
 yesBtn.addEventListener("click", () => {
-  music.play(); // avvia musica
+  music.play(); // start music
+  noBtn.style.display = "none"; // hide NO button
 
   response.innerHTML = `
     <h2 style="color:#ff4d88;">YAYYYY 💖</h2>
     <p style="font-size:1.3rem;">I knew you'd say yes!!! 🥰</p>
-    <img src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif">
+    <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExOXcyZ2d1MDhvdGF6ZDNxeGhmNGY3ZDFoN2ZjMDRjemJtdHQzeGp1NSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/O9G5FLJkf9HPqxpSqZ/giphy.gif">
   `;
 });
 </script>
