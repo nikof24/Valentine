@@ -127,9 +127,9 @@
   const yesMusic = document.getElementById("yesMusic");
   const openBtn = document.getElementById("openBtn");
 
-  // Start button click
+  // Click "Open Me" button: play music and show card immediately
   openBtn.addEventListener("click", () => {
-    bgMusic.play().catch(() => {}); // play background music
+    bgMusic.play().catch(err => console.log("Music playback failed:", err));
     card.style.display = "block";    // show Valentine card
     openBtn.style.display = "none";  // hide Open Me button
     setInitialPosition();             // position NO button
