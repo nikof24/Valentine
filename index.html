@@ -83,8 +83,8 @@
   <div id="response"></div>
 </div>
 
-<!-- Background Music -->
-<audio id="bgMusic" loop>
+<!-- Background Music (autoplay muted) -->
+<audio id="bgMusic" loop autoplay muted>
   <source src="https://raw.githubusercontent.com/nikof24/Valentine/main/background.mp3" type="audio/mpeg" />
 </audio>
 
@@ -101,14 +101,17 @@
   const bgMusic = document.getElementById("bgMusic");
   const yesMusic = document.getElementById("yesMusic");
 
-  // Start background music after first user interaction (click or touch)
-  function startBgMusic() {
-    bgMusic.play().catch(err => console.log("BG music play error:", err));
-    window.removeEventListener("click", startBgMusic);
-    window.removeEventListener("touchstart", startBgMusic);
+  // Unmute background music on first user interaction (click or touch)
+  function unmuteBgMusic() {
+    if (bgMusic.muted) {
+      bgMusic.muted = false;
+      bgMusic.play().catch(() => {});
+    }
+    window.removeEventListener("click", unmuteBgMusic);
+    window.removeEventListener("touchstart", unmuteBgMusic);
   }
-  window.addEventListener("click", startBgMusic);
-  window.addEventListener("touchstart", startBgMusic);
+  window.addEventListener("click", unmuteBgMusic);
+  window.addEventListener("touchstart", unmuteBgMusic);
 
   // Set initial NO button position relative to YES button
   function setInitialPosition() {
