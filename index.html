@@ -12,20 +12,23 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #ffe6f0;
+  background: linear-gradient(135deg, #ffe6f0, #ffd6ec);
   font-family: Arial, Helvetica, sans-serif;
-  text-align: center;
 }
 
-.container {
-  width: 100%;
-  max-width: 500px;
+/* Riquadro bianco */
+.card {
+  background: white;
+  padding: 50px;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+  text-align: center;
   position: relative;
+  width: 400px;
 }
 
 h1 {
   color: #ff4d88;
-  font-size: 2.2rem;
   margin-bottom: 40px;
 }
 
@@ -33,7 +36,7 @@ h1 {
   display: flex;
   justify-content: center;
   gap: 40px;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 button {
@@ -53,7 +56,7 @@ button {
 #noBtn {
   background-color: #999;
   color: white;
-  position: absolute; /* fondamentale */
+  position: absolute;
 }
 
 button:hover {
@@ -61,7 +64,7 @@ button:hover {
 }
 
 #response img {
-  width: 300px;
+  width: 250px;
   margin-top: 20px;
   border-radius: 12px;
 }
@@ -70,21 +73,62 @@ button:hover {
 
 <body>
 
-<div class="container">
+<div class="card">
   <h1>Will you be my Valentine? 💖</h1>
 
   <div class="buttons">
     <button id="yesBtn">Yes 💘</button>
   </div>
 
-  <!-- No button separato per non rompere il layout -->
   <button id="noBtn">No 😢</button>
 
   <div id="response"></div>
 </div>
 
+<!-- Musica -->
+<audio id="music" loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
 <script>
 const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
 const response = document.getElementById("response");
-const conta
+const card = document.querySelector(".card");
+const music = document.getElementById("music");
+
+/* Posizione iniziale del NO */
+function setInitialPosition() {
+  const yesRect = yesBtn.getBoundingClientRect();
+  const cardRect = card.getBoundingClientRect();
+  noBtn.style.left = (yesRect.right - cardRect.left + 20) + "px";
+  noBtn.style.top = (yesRect.top - cardRect.top) + "px";
+}
+setInitialPosition();
+
+/* NO scappa */
+noBtn.addEventListener("mouseover", () => {
+  const maxX = card.clientWidth - noBtn.offsetWidth;
+  const maxY = card.clientHeight - noBtn.offsetHeight;
+
+  const randomX = Math.random() * maxX;
+  const randomY = Math.random() * maxY;
+
+  noBtn.style.left = randomX + "px";
+  noBtn.style.top = randomY + "px";
+});
+
+/* YES */
+yesBtn.addEventListener("click", () => {
+  music.play(); // avvia musica
+
+  response.innerHTML = `
+    <h2 style="color:#ff4d88;">YAYYYY 💖</h2>
+    <p style="font-size:1.3rem;">I knew you'd say yes!!! 🥰</p>
+    <img src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif">
+  `;
+});
+</script>
+
+</body>
+</html>
