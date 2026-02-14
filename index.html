@@ -72,7 +72,7 @@
 <body>
 
 <div class="card">
-  <h1>Natasha, will you be my Valentine? 💖</h1>
+  <h1>Natasha, will you be my Valentine? 🎉</h1>
 
   <div class="buttons">
     <button id="yesBtn">Yes 😊</button>
@@ -83,14 +83,14 @@
   <div id="response"></div>
 </div>
 
-<!-- Background Music (autoplay muted) -->
-<audio id="bgMusic" loop autoplay muted>
-  <source src="https://raw.githubusercontent.com/nikof24/Valentine/main/background.mp3" type="audio/mpeg" />
+<!-- Background Music -->
+<audio id="bgMusic" loop>
+  <source src="https://nikof24.github.io/Valentine/background.mp3" type="audio/mpeg">
 </audio>
 
 <!-- YES Button Music -->
 <audio id="yesMusic">
-  <source src="https://raw.githubusercontent.com/nikof24/Valentine/main/yes.mp3" type="audio/mpeg" />
+  <source src="https://nikof24.github.io/Valentine/yes.mp3" type="audio/mpeg">
 </audio>
 
 <script>
@@ -101,17 +101,12 @@
   const bgMusic = document.getElementById("bgMusic");
   const yesMusic = document.getElementById("yesMusic");
 
-  // Unmute background music on first user interaction (click or touch)
-  function unmuteBgMusic() {
-    if (bgMusic.muted) {
-      bgMusic.muted = false;
-      bgMusic.play().catch(() => {});
-    }
-    window.removeEventListener("click", unmuteBgMusic);
-    window.removeEventListener("touchstart", unmuteBgMusic);
-  }
-  window.addEventListener("click", unmuteBgMusic);
-  window.addEventListener("touchstart", unmuteBgMusic);
+  // Attempt to autoplay background music on page load
+  window.addEventListener("load", () => {
+    bgMusic.play().catch(() => {
+      console.log("Autoplay blocked, waiting for first user interaction");
+    });
+  });
 
   // Set initial NO button position relative to YES button
   function setInitialPosition() {
@@ -134,15 +129,14 @@
     noBtn.style.top = randomY + "px";
   }
 
-  // NO button evades mouse hover
+  // NO button evades mouse hover or touch
   noBtn.addEventListener("mouseover", moveNoButton);
-  // NO button evades touch on mobile
   noBtn.addEventListener("touchstart", e => {
     e.preventDefault();
     moveNoButton();
   });
 
-  // YES button click behavior
+  // YES button click
   yesBtn.addEventListener("click", () => {
     bgMusic.pause();  // Stop background music
     yesMusic.play();  // Play YES music
@@ -151,7 +145,7 @@
     response.innerHTML = `
       <h2 style="color:#ff4d88;">YAYYYY 🎉</h2>
       <p style="font-size:1.3rem;">I knew you'd say yes!!! 🥰</p>
-      <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExOXcyZ2d1MDhvdGF6ZDNxeGhmNGY3ZDFoN2ZjMDRjemJtdHQzeGp1NSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/O9G5FLJkf9HPqxpSqZ/giphy.gif" />
+      <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExOXcyZ2d1MDhvdGF6ZDNxeGhmNGY3ZDFoN2ZjMDRjemJtdHQzeGp1NSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/O9G5FLJkf9HPqxpSqZ/giphy.gif">
     `;
   });
 </script>
